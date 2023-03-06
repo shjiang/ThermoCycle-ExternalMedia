@@ -1806,7 +1806,8 @@ package Test "Test models for the different solvers"
       annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
   end WaterComparison;
 
-  model TestRefprop
+  model TestRefprop  "Test media with self defined mixture by using Refprop"
+  extends Modelica.Icons.Example;
 
     package Medium = ExternalMedia.Examples.Test;
     Medium.AbsolutePressure p1;

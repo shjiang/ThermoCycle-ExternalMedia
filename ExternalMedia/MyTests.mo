@@ -1,9 +1,14 @@
 within ExternalMedia;
 package MyTests
-  model TestFunc
+  model TestFunc "test the coolprop fuction directly here"
     ThermodynamicState state;
   equation
     state = setState_ph(1e6,2e5,0,"My","CoolProp","REFPROP::CO2[0.7]&R125[0.3]|calc_transport=1|debug=true");
+    annotation (Icon(graphics={Ellipse(extent={{-70,76},{78,-68}}, lineColor={
+                28,108,200}), Text(
+            extent={{-62,52},{70,-52}},
+            textColor={238,46,47},
+            textString="T")}));
   end TestFunc;
 
   function setState_ph

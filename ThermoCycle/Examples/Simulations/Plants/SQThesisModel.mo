@@ -94,16 +94,16 @@ ThermoCycle.Obsolete.Hx_06122013  Condenser(
     annotation (Placement(transformation(extent={{6,-12},{-14,8}})));
 ThermoCycle.Components.FluidFlow.Reservoirs.Source_Cdot  Heat_sink(rho=1000, cp=4188)
     annotation (Placement(transformation(extent={{-46,-6},{-26,14}})));
-ThermoCycle.Components.FluidFlow.Sensors.SensP sensP(redeclare package Medium =
-        ThermoCycle.Media.R245fa_CP)
+ThermoCycle.Components.FluidFlow.Sensors.SensP sensP(redeclare package Medium
+      = ThermoCycle.Media.R245fa_CP)
                                   annotation (Placement(transformation(
         extent={{-5,-6},{5,6}},
         rotation=90,
-        origin={-80,-11})));
- ThermoCycle.Components.HeatFlow.Sensors.SensTp sensTp(redeclare package Medium =
-        ThermoCycle.Media.R245fa_CP)
-                                    annotation (Placement(transformation(extent={{16,40},
-            {26,50}})));
+        origin={-84,-17})));
+ ThermoCycle.Components.HeatFlow.Sensors.SensTp sensTp(redeclare package Medium
+      = ThermoCycle.Media.R245fa_CP)
+                                    annotation (Placement(transformation(extent={{16,42},
+            {26,52}})));
  ThermoCycle.Components.FluidFlow.Sensors.SensMdot sensMdot(redeclare package
       Medium =
         ThermoCycle.Media.R245fa_CP)
@@ -159,7 +159,8 @@ equation
       smooth=Smooth.None,
       thickness=0.5));
   connect(sensP.p, control_unit1.p_cd) annotation (Line(
-      points={{-83.6,-7},{-83.6,6},{-88,6},{-88,84},{16,84},{16,73.32},{36.84,73.32}},
+      points={{-87.6,-13},{-87.6,6},{-88,6},{-88,84},{16,84},{16,73.32},{36.84,
+          73.32}},
       color={0,0,127},
       pattern=LinePattern.Dot,
       smooth=Smooth.None));
@@ -174,12 +175,12 @@ equation
       pattern=LinePattern.Dot,
       smooth=Smooth.None));
   connect(sensTp.T, control_unit1.T_su_exp) annotation (Line(
-      points={{25,48},{30,48},{30,56},{22,56},{22,64.68},{36.84,64.68}},
+      points={{25,50},{30,50},{30,56},{22,56},{22,64.68},{36.84,64.68}},
       color={0,0,127},
       pattern=LinePattern.Dot,
       smooth=Smooth.None));
   connect(sensTp.p, control_unit1.p_su_exp) annotation (Line(
-      points={{17,48},{14,48},{14,61.8},{36.84,61.8}},
+      points={{17,50},{14,50},{14,61.8},{36.84,61.8}},
       color={0,0,127},
       pattern=LinePattern.Dot,
       smooth=Smooth.None));
@@ -194,12 +195,12 @@ equation
       pattern=LinePattern.Dot,
       smooth=Smooth.None));
   connect(data.y[1:2], Heat_source.source) annotation (Line(
-      points={{-67.2,71.82},{-50.64,71.82},{-50.64,71.92},{-35.68,71.92}},
+      points={{-67.2,71.91},{-50.64,71.91},{-50.64,71.92},{-35.68,71.92}},
       color={0,128,255},
       pattern=LinePattern.Dash,
       smooth=Smooth.None));
   connect(data.y[3:4], Heat_sink.source) annotation (Line(
-      points={{-67.2,72.54},{-52,72.54},{-52,3.9},{-43.1,3.9}},
+      points={{-67.2,72.27},{-52,72.27},{-52,3.9},{-43.1,3.9}},
       color={0,128,255},
       pattern=LinePattern.Dash,
       smooth=Smooth.None));
@@ -220,11 +221,11 @@ equation
       color={0,0,255},
       smooth=Smooth.None));
   connect(DP_ev.OutFlow, sensTp.InFlow) annotation (Line(
-      points={{-2.7,41},{7.65,41},{7.65,42.6},{17.5,42.6}},
+      points={{-2.7,41},{7.65,41},{7.65,44.6},{17.5,44.6}},
       color={0,0,255},
       smooth=Smooth.None));
   connect(sensTp.OutFlow, expander.InFlow) annotation (Line(
-      points={{24.5,42.6},{59.2,42.6},{59.2,18.6}},
+      points={{24.5,44.6},{59.2,44.6},{59.2,18.6}},
       color={0,0,255},
       smooth=Smooth.None));
   connect(expander.OutFlow, DP_cd.InFlow) annotation (Line(
@@ -239,14 +240,6 @@ equation
       points={{-14,-7},{-24,-7},{-24,-8},{-34,-8},{-34,-13.6}},
       color={0,0,255},
       smooth=Smooth.None));
-  connect(tank.OutFlow, sensP.InFlow) annotation (Line(
-      points={{-34,-30.8},{-34,-38},{-77.66,-38},{-77.66,-14}},
-      color={0,0,255},
-      smooth=Smooth.None));
-  connect(sensP.OutFlow, Pump.InFlow) annotation (Line(
-      points={{-77.6,-8},{-78,-8},{-78,0},{-58,0},{-58,20.5},{-68.8,20.5}},
-      color={0,0,255},
-      smooth=Smooth.None));
   connect(Heat_source.flange, sensTsf.inlet) annotation (Line(
       points={{-23.44,71.92},{-14.72,71.92},{-14.72,72.4},{-6,72.4}},
       color={255,0,0},
@@ -255,9 +248,12 @@ equation
       points={{0,72.4},{4,72.4},{4,72},{6,72},{6,51},{-22,51}},
       color={255,0,0},
       smooth=Smooth.None));
+  connect(Pump.InFlow, tank.OutFlow) annotation (Line(points={{-68.8,20.5},{-62,
+          20.5},{-62,-48},{-34,-48},{-34,-30.8}}, color={0,0,255}));
+  connect(sensP.InFlow, Pump.InFlow) annotation (Line(points={{-78.54,-17},{-62,
+          -17},{-62,20.5},{-68.8,20.5}}, color={0,0,255}));
   annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}}),
-                      graphics),
+            -100},{100,100}})),
     experiment(StopTime=1669),
     __Dymola_experimentSetupOutput(equdistant=false),
     Documentation(info="<html>
